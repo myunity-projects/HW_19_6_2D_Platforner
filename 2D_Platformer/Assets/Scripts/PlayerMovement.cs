@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Run();
         FlipSprite();
+        Run();        
     }
 
     private void FixedUpdate()
@@ -41,7 +41,12 @@ public class PlayerMovement : MonoBehaviour
     {       
         if(GlobalVariables.playerHasHorizontalMovement)
         {
-            transform.localScale = new Vector2(Mathf.Sign(_rigidbody2D.velocity.x), 1f);
+            float horizontalVelocity = Mathf.Abs(_rigidbody2D.velocity.x);
+
+            if (horizontalVelocity > Mathf.Epsilon)
+            {
+                transform.localScale = new Vector2(Mathf.Sign(horizontalVelocity), 1f);
+            }
         }        
     }
 
